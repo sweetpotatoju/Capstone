@@ -1,0 +1,74 @@
+.li{
+    list-style-type: none;
+}
+
+.headline{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.headline-item{
+    height: 100%;
+    width: 100%;
+    padding: 40px;
+    /* border-left: solid 1px;
+    border-right: solid 1px;
+    border-bottom: solid 1px; */
+    border: solid 1px;
+}
+
+.headline-item:hover{
+    cursor: pointer;
+}
+
+.topic{
+    width: 100%;
+    height: 30%;
+    border: solid 1px;
+    text-align: center;
+    padding: 10px;
+}
+
+.p-nGraph{
+    height: 40px;
+    background: pink;
+    border-radius: 40px;
+    margin: 60px;
+}
+
+.p-nGraph .positive{
+    display: block;
+    width: 65%;
+    height: 40px;
+    line-height: 40px;
+    text-align: right;
+    background-color: skyblue;
+    border-radius: 40px;
+    box-sizing: border-box;
+    color: #fff;
+}
+
+.comment{
+    align-items: center;
+    margin: 20px;
+}
+
+.scroll-page{
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.scroll-page div{
+    display: flex;
+    margin: 10px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    border-bottom: solid 1px;
+}
+
+.scroll-page div:hover{
+    cursor: pointer;
+}
