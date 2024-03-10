@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/quiz.css">
+    <title>시사 퀴즈</title>
+    <script>
+        var questions = [
+            "1. 첫 번째 문제입니다.",
+            "2. 두 번째 문제입니다."
+        ];
+
+        var explanations = [
+            "1. 해설입니다.",
+            "2. 해설입니다."
+        ];
+
+        var currentQuestionIndex = 0;
+
+        function showNextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                updateQuestion();
+            }
+        }
+
+        function showPreviousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                updateQuestion();
+            }
+        }
+
+        function updateQuestion() {
+            document.getElementById('questionNumber').innerText = questions[currentQuestionIndex];
+            document.getElementById('answerInput').value = '';
+            updatePreview();
+        }
+
+        function updatePreview() {
+            var previewContainer = document.getElementById('previewContainer');
+            previewContainer.innerHTML = '';
+
+            for (var i = 0; i < questions.length; i++) {
+                var previewItem = document.createElement('div');
+                previewItem.className = 'previewItem';
+
+                var questionParts = questions[i].split('. ');
+                var questionNumber = questionParts[0];
+                var questionText = questionParts.slice(1).join('. ');
+
+                var combinedText = questionNumber + '. ' + (questionText.length > 10 ? questionText.substring(0, 10) + '...' : questionText);
+                previewItem.innerText = combinedText;
+
+                if (i === currentQuestionIndex) {
+                    previewItem.classList.add('selected');
+                }
+
+                previewContainer.appendChild(previewItem);
+            }
+        }
+
+        window.onload = function () {
+            updateQuestion();
+        };
+
+        function updatePreviewText(inputText) {
+            var previewContainer = document.getElementById('previewContainer');
+            var previewItem = previewContainer.children[currentQuestionIndex];
+            if (previewItem) {
+                var limitedText = inputText.length > 10 ? inputText.substring(0, 10) + '...' : inputText;
+                previewItem.innerText = limitedText;
+            }
+        }
+
+        function submitAnswers() {
+            var explanationContainer = document.getElementById('explanationContainer');
+            explanationContainer.innerHTML = '';
+
+            for (var i = 0; i < explanations.length; i++) {
+                var explanationItem = document.createElement('div');
+                explanationItem.className = 'explanationItem';
+
+                var explanationParts = explanations[i].split('. ');
+                var explanationNumber = explanationParts[0];
+                var explanationText = explanationParts.slice(1).join('. ');
+
+                // Append the question index to the explanation number
+                var combinedExplanation = (i + 1) + '. ' + explanationText;
+                explanationItem.innerText = combinedExplanation;
+
+                explanationContainer.appendChild(explanationItem);
+            }
+
+            // 변경된 부분: 해설을 텍스트 아래에 추가
+            var questionContainer = document.getElementById('questionContainer');
+            questionContainer.appendChild(explanationContainer);
+        }
+</script>
+
+</head>
+<body>
+    <header>
+        <div id="chart"> <!-- 찬반 그래프 위치 -->
+            <!-- Add your chart content here -->
+        </div>
+
+        <div id="topText">상위 50%</div>
+
+        <div id="myPage">My Page</div>
+
+    </header>
+
+    <div id="questionContainer">
+        <div id="questionNumber"></div>
+
+        <textarea id="answerInput" placeholder="여기에 답변을 입력하세요." oninput="updatePreviewText(this.value)"></textarea>
+
+        <!-- 이전 문제, 다음 문제 버튼 추가 -->
+        <button id="prevButton" onclick="showPreviousQuestion()">이전 문제</button>
+        <button id="nextButton" onclick="showNextQuestion()">다음 문제</button>
+    </div>
+
+    <div id="boxButtons">
+            <button class="boxButton">이슈정리</button>
+            <button class="boxButton">커뮤니티</button>
+            <button class="boxButton">해답보기</button>
+    </div>
+
+    <!-- 문제 미리보기 뷰 추가 -->
+    <div id="previewContainer"></div>
+
+    <footer>
+        <button id="submitBtn" onclick="submitAnswers()">문제 제출</button>
+    </footer>
+
+    <!-- 답변 제출 후 설명 표시 -->
+    <div id="explanationContainer"></div>
+
+    <script>
+        function updatePreviewText(inputText) {
+        // 현재 입력된 텍스트를 가져와서 문제 미리보기 업데이트
+        var previewContainer = document.getElementById('previewContainer');
+        var previewItem = previewContainer.children[currentQuestionIndex];
+        if (previewItem) {
+            // 변경된 부분: "1. " 또는 "2. "를 유지한 채로 뒤에 텍스트 추가
+            var updatedText = (currentQuestionIndex + 1) + '. ' + inputText;
+
+            // 변경된 부분: 미리보기에 텍스트 업데이트
+            var limitedText = updatedText.length > 15 ? updatedText.substring(0, 15) + '...' : updatedText;
+            previewItem.innerText = limitedText;
+        }
+    }
+    </script>
+</body>
+</html>
