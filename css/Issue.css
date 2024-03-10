@@ -1,0 +1,49 @@
+.li{
+    list-style-type: none;
+}
+
+.headline{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.headline-item{
+    height: 100%;
+    width: 100%;
+    padding: 40px;
+    /* border-left: solid 1px;
+    border-right: solid 1px;
+    border-bottom: solid 1px; */
+    border: solid 1px;
+}
+
+.headline-item:hover{
+    cursor: pointer;
+}
+.scroll-page{
+    height: 1180px;
+    overflow-y: scroll;
+}
+
+.scroll-page div:hover{
+    cursor: pointer;
+}
+
+.issue-box{
+    display: flex;
+    text-align: left;
+    height: 300px;
+    border-bottom: solid 1px;
+    position: relative;
+}
+
+.image-box{
+    left: 10px;
+    top: 33px;
+    float:left;
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    background-color: skyblue;
+}
